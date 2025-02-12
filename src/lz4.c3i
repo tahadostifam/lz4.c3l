@@ -1,0 +1,43 @@
+module lz4;
+
+// def Stream_t = Stream_u;
+// union Stream_u @extern("LZ4_stream_u") {
+    // char minStateSize[256];
+    // LZ4_stream_t_internal internal_donotuse;
+    // int i;
+// }
+
+// def StreamDecode_T = 
+// union StreamDecode_U {}
+
+fn int version_number() @extern("LZ4_versionNumber");
+fn ZString version_string() @extern("LZ4_versionString");
+fn int compress_default(ZString src, ZString dst, int srcSize, int dstCapacity) @extern("LZ4_compress_default");
+fn int compress_bound(int inputSize) @extern("LZ4_compressBound");
+fn int decompress_safe(ZString src, ZString, int compressedSize, int dstCapacity) @extern("LZ4_decompress_safe");
+fn int compress_fast(ZString src, ZString, int srcSize, int dstCapacity, int acceleration) @extern("LZ4_compress_fast");
+fn int sizeof_state() @extern("LZ4_sizeofState");
+fn int compress_fast_ext_state(void* state, ZString src, ZString, int srcSize, int dstCapacity, int acceleration) @extern("LZ4_compress_fast_extState");
+fn int compress_dest_siz(ZString src, ZString, int* srcSizePtr, int targetDstSize) @extern("LZ4_compress_destSiz");
+fn int decompress_safe_partial(ZString src, ZString, int srcSize, int targetOutputSize, int dstCapacity) @extern("LZ4_decompress_safe_partial");
+// fn int free_stream(LZ4_stream_t* streamPtr) @extern("LZ4_freeStream");
+
+// fn void reset_stream_fast(LZ4_stream_t* streamPtr) @extern("LZ4_resetStream_fast");
+// fn int load_dict(LZ4_stream_t* streamPtr, const char* dictionary, int dictSize) @extern("LZ4_loadDict");
+// fn int load_dict_slow(LZ4_stream_t* streamPtr, const char* dictionary, int dictSize) @extern("LZ4_loadDictSlow");
+
+// fn void (LZ4_stream_t* workingStream, LZ4_stream_t* dictionaryStream) @extern("LZ4_attach_dictionary");
+
+// fn int compress_fast_continue(LZ4_stream_t* streamPtr, ZString src, ZString dst, int srcSize, int dstCapacity, int acceleration) @extern("LZ4_compress_fast_continue");
+// fn int save_dict(LZ4_stream_t* streamPtr, ZString safeBuffer, int maxDictSize) @extern("LZ4_saveDict");
+
+// fn int set_stream_decode (LZ4_streamDecode_t* LZ4_streamDecode, const char* dictionary, int dictSize) @extern("LZ4_setStreamDecode");
+
+fn int decoder_ring_buffer_size(int maxBlockSize) @extern("LZ4_decoderRingBufferSize");
+
+// fn int LZ4_decompress_safe_continue (LZ4_streamDecode_t* LZ4_streamDecode, const char* src, char* dst, int srcSize, int dstCapacity);
+
+// fn int LZ4_decompress_safe_usingDict(const char* src, char* dst, const char* dictStart, int dictSize);
+
+// fn int LZ4_decompress_safe_partial_usingDict(const char* src, char* dst, int compressedSize, const char* dictStart, int dictSize);
+
