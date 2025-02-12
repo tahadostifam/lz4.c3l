@@ -1,5 +1,14 @@
 module lz4;
 
+const LZ4_MEMORY_USAGE_MIN = 10;
+const LZ4_MEMORY_USAGE_DEFAULT = 14;
+const LZ4_MEMORY_USAGE_MAX = 20;
+
+const LZ4_MAX_INPUT_SIZE = 0x7E000000;
+
+// FIXME
+// const LZ4_COMPRESSBOUND = (isize) ((unsigned)(isize) > (unsigned)LZ4_MAX_INPUT_SIZE ? 0 : (isize) + ((isize) / 255) + 16);
+
 // def Stream_t = Stream_u;
 // union Stream_u @extern("LZ4_stream_u") {
     // char minStateSize[256];
@@ -11,15 +20,16 @@ module lz4;
 // union StreamDecode_U {}
 
 fn int version_number() @extern("LZ4_versionNumber");
-fn ZString version_string() @extern("LZ4_versionString");
-fn int compress_default(ZString src, ZString dst, int srcSize, int dstCapacity) @extern("LZ4_compress_default");
+fn char* version_string() @extern("LZ4_versionString");
+fn int compress_default(char* src, char* dst, int srcSize, int dstCapacity) @extern("LZ4_compress_default");
 fn int compress_bound(int inputSize) @extern("LZ4_compressBound");
-fn int decompress_safe(ZString src, ZString, int compressedSize, int dstCapacity) @extern("LZ4_decompress_safe");
-fn int compress_fast(ZString src, ZString, int srcSize, int dstCapacity, int acceleration) @extern("LZ4_compress_fast");
+fn int decompress_safe(char* src, char*, int compressedSize, int dstCapacity) @extern("LZ4_decompress_safe");
+fn int compress_fast(char* src, char*, int srcSize, int dstCapacity, int acceleration) @extern("LZ4_compress_fast");
 fn int sizeof_state() @extern("LZ4_sizeofState");
-fn int compress_fast_ext_state(void* state, ZString src, ZString, int srcSize, int dstCapacity, int acceleration) @extern("LZ4_compress_fast_extState");
-fn int compress_dest_siz(ZString src, ZString, int* srcSizePtr, int targetDstSize) @extern("LZ4_compress_destSiz");
-fn int decompress_safe_partial(ZString src, ZString, int srcSize, int targetOutputSize, int dstCapacity) @extern("LZ4_decompress_safe_partial");
+fn int compress_fast_ext_state(void* state, char* src, char*, int srcSize, int dstCapacity, int acceleration) @extern("LZ4_compress_fast_extState");
+fn int compress_dest_siz(char* src, char*, int* srcSizePtr, int targetDstSize) @extern("LZ4_compress_destSiz");
+fn int decompress_safe_partial(char* src, char*, int srcSize, int targetOutputSize, int dstCapacity) @extern("LZ4_decompress_safe_partial");
+
 // fn int free_stream(LZ4_stream_t* streamPtr) @extern("LZ4_freeStream");
 
 // fn void reset_stream_fast(LZ4_stream_t* streamPtr) @extern("LZ4_resetStream_fast");
@@ -28,8 +38,8 @@ fn int decompress_safe_partial(ZString src, ZString, int srcSize, int targetOutp
 
 // fn void (LZ4_stream_t* workingStream, LZ4_stream_t* dictionaryStream) @extern("LZ4_attach_dictionary");
 
-// fn int compress_fast_continue(LZ4_stream_t* streamPtr, ZString src, ZString dst, int srcSize, int dstCapacity, int acceleration) @extern("LZ4_compress_fast_continue");
-// fn int save_dict(LZ4_stream_t* streamPtr, ZString safeBuffer, int maxDictSize) @extern("LZ4_saveDict");
+// fn int compress_fast_continue(LZ4_stream_t* streamPtr, char* src, char* dst, int srcSize, int dstCapacity, int acceleration) @extern("LZ4_compress_fast_continue");
+// fn int save_dict(LZ4_stream_t* streamPtr, char* safeBuffer, int maxDictSize) @extern("LZ4_saveDict");
 
 // fn int set_stream_decode (LZ4_streamDecode_t* LZ4_streamDecode, const char* dictionary, int dictSize) @extern("LZ4_setStreamDecode");
 
