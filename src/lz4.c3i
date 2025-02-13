@@ -6,7 +6,7 @@ fn char* version_string() @extern("LZ4_versionString");
 
 // basic funcs
 fn int compress_default(char* src, char* dst, int srcSize, int dstCapacity) @extern("LZ4_compress_default");
-fn int decompress_safe(char* src, char*, int compressedSize, int dstCapacity) @extern("LZ4_decompress_safe");
+fn int decompress_safe(char* src, char* dst, int compressedSize, int dstCapacity) @extern("LZ4_decompress_safe");
 
 // advanced funcs
 fn int compress_bound(int inputSize) @extern("LZ4_compressBound");

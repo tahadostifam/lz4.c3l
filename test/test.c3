@@ -1,24 +1,16 @@
-# LZ4 binding for C3 Language
-
-### Dependencies
-C3 Compiler Version: 0.6.7 
-
-```bash
-sudo zypper in liblz4-1 liblz4-devel 
-```
-
-### Unit Tests
-```
-c3c test -l lz4
-```
-
-### Examples
 import std::io;
 import libc;
 import lz4;
 
-```c3
-fn void main() {
+fn void test_version_string() @test {
+    lz4::version_string();
+}
+
+fn void test_version_number() @test {
+    lz4::version_number();
+}
+
+fn void test_compress_and_decompres() @test {
     ZString input = "This is a test string to compress using LZ4!";
     int originalSize = (int) libc::strlen(input) + 1; 
 
@@ -34,7 +26,7 @@ fn void main() {
     int compressedSize = lz4::compress_default(input, compressedData, originalSize, maxCompressedSize);
     if (compressedSize <= 0)
     {	
-        abort("compression failed");
+		abort("compression failed");
     }
 
     char *decompressedData = (char *)malloc(originalSize);  
@@ -44,11 +36,6 @@ fn void main() {
     }
 
     int decompressedSize = lz4::decompress_safe(compressedData, decompressedData, compressedSize, originalSize);
-
+    
     assert(decompressedSize == originalSize);
 }
-```
-
-### Contribution
-
-Feel free to create issue/PR if you encountered any problem.
