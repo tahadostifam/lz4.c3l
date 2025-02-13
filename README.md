@@ -16,10 +16,10 @@ Clone it inside `lib` directory of your project:
 git clone --depth=1 https://github.com/tahadostifam/lz4.c3l
 ```
 
-Add lz4 library to your linked lists in project.json :
+Add lz4 library to your dependencies in project.json :
 
 ```json
-"linked-libraries": ["lz4"]
+"dependencies": ["lz4"]
 ```
 
 ### Unit Tests
