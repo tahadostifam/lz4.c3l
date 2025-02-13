@@ -3,7 +3,7 @@ import libc;
 import lz4;
 
 fn int main(String[] args)
-{	
+{	    
 	ZString input = "This is a test string to compress using LZ4!";
     int inputSize = (int) libc::strlen(input) + 1; 
 	
