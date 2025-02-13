@@ -10,6 +10,8 @@ sudo zypper in liblz4-1 liblz4-devel
 
 ### Installation
 
+Clone it inside `lib` directory of your project: 
+
 ```bash
 git clone --depth=1 https://github.com/tahadostifam/lz4.c3l
 ```
